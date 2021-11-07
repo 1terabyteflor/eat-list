@@ -4,26 +4,26 @@ import yelp from "../api/yelp";
 export default () => {
     const [results, setResults] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
-      
-    const searchApi = async (searchTerm) => {
+    
+    const searchRestaurants = async (searchTerm) => {
         try {
           const response = await yelp.get('/search', {
             params: {
               limit: 50,
               term: searchTerm,
+              //TODO: permisos de la app para poder localizar en tiempo real dónde está el usuario
               location: 'buenos aires'
             }
           });
           setResults(response.data.businesses);
-          console.log(response.data.businesses);
       
         } catch (err) {
-          setErrorMessage('Something went wrong');
+          setErrorMessage('Algo salió mal');
         }
       };
       useEffect(() => {
-        searchApi('pasta');
+        searchRestaurants('restaurange');
       }, []);
 
-      return [searchApi, results, errorMessage];
+      return [searchRestaurants, results, errorMessage];
 }

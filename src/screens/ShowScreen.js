@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Context } from '../context/BlogContext';
+import { Context } from '../context/EatListContext';
 import { EvilIcons } from '@expo/vector-icons';
 
 const ShowScreen = ({ navigation }) => {

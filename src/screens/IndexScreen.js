@@ -6,20 +6,20 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import { Context } from '../context/BlogContext';
+import { Context } from '../context/EatListContext';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 import mainStyles from '../utils/styles/mainStyles';
 
 
 const IndexScreen = ({ navigation }) => {
-  const { state, deleteBlogPost, getBlogPosts } = useContext(Context);
+  const { state, deleteItem, getEatList } = useContext(Context);
 
   useEffect(() => {
-    getBlogPosts();
+    getEatList();
 
     const listener = navigation.addListener('didFocus', () => {
-      getBlogPosts();
+      getEatList();
     });
 
     return () => {
@@ -30,11 +30,11 @@ const IndexScreen = ({ navigation }) => {
     return (
       <View style={mainStyles.container}>
       <Text style={styles.title}>
-            Por hacer: 
+            Mi eat-list: 
         </Text>
         <FlatList
           data={state}
-          keyExtractor={(blogPost) => blogPost.title}
+          keyExtractor={(item) => item.title}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
@@ -47,7 +47,7 @@ const IndexScreen = ({ navigation }) => {
                   <Text style={styles.content}>
                     {item.content}
                   </Text>
-                  <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                  <TouchableOpacity onPress={() => deleteItem(item.id)}>
                     <FontAwesome style={styles.icon} name="check" />
                   </TouchableOpacity>
                 </View>

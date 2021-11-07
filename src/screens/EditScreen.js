@@ -1,19 +1,19 @@
 import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
-import { Context } from '../context/BlogContext';
-import MovieForm from '../components/MovieForm';
+import { Context } from '../context/EatListContext';
+import RestaurantList from '../components/RestaurantList';
 
 const EditScreen = ({ navigation }) => {
   const id = navigation.getParam('id');
-  const { state, editBlogPost } = useContext(Context);
+  const { state, editItem } = useContext(Context);
 
   const blogPost = state.find(blogPost => blogPost.id === id);
 
   return (
-    <MovieForm
+    <RestaurantList
       initialValues={{ title: blogPost.title, content: blogPost.content }}
       onSubmit={(title, content) => {
-        editBlogPost(id, title, content, () => navigation.pop());
+        editItem(id, title, content, () => navigation.pop());
       }}
     />
   );

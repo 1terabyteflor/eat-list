@@ -1,26 +1,23 @@
-import React, { useContext, useState} from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { Context } from '../context/BlogContext';
+import React, {useState} from 'react';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import Search from '../components/Search';
 import useResults from '../hooks/useResults';
-import MovieForm from '../components/MovieForm';
+import RestaurantList from '../components/RestaurantList';
 
 
 const CreateScreen = ({ navigation }) => {
-  const { addBlogPost } = useContext(Context);
   const [term, setTerm] = useState('');
-  const [searchApi, results, errorMessage] = useResults();
+  const [searchRestaurants, restaurants, errorMessage] = useResults();
 
   return (
     <View>
-      <Search term={term} onTermChange={setTerm} onTermSubmit={() => searchApi(term)} />
+      <Search term={term} onTermChange={setTerm} onTermSubmit={() => searchRestaurants(term)} />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
-      <Text>We have found {results.length} results</Text>
-      <MovieForm
-        onSubmit={(title, content) => {
-          addBlogPost(title, content, () => navigation.navigate('Index'));
-        }}
-      />
+      <Text>We have found {restaurants.length} results</Text>
+      <ScrollView>
+        <RestaurantList
+          restaurants={restaurants}/>
+        </ScrollView>
     </View>
   );
 };
