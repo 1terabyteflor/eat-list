@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
       width: '100%',
       paddingHorizontal: 20,
       paddingTop: 25,
-      paddingBottom: 5
+      paddingBottom: 25
     },
     containerInput: {
       height: 40,

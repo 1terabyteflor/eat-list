@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { StyleSheet, Text, View, FlatList, Image, Button } from 'react-native';
 import yelp from '../api/yelp';
+import { useNavigation } from '@react-navigation/native';
+import {Context} from '../context/EatListContext';
 
 const DetailScreen = ({ route }) => {
   const { id } = route.params;
   const [details, setDetails] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const navigation = useNavigation(); 
+  const { addToEatList } = useContext(Context);
 
-  //TODO: mover a un Hook
+  //mover a un Hook
   const restaurantDetail = async () => {
     try {
     const response = await yelp.get(`/${id}`);
@@ -50,9 +54,9 @@ const DetailScreen = ({ route }) => {
       </Text>
       {details.display_phone ? <Text>Tel: {details.display_phone}</Text> : null}
       </View>
-{/* 
-      <Button title="Agregar a mi eat-list" onPress={(title) => {
-        addToEatList(details.name, () => navigation.navigate('Index'));
+
+      {/* <Button title="Agregar a mi eat-list" onPress={(name) => {
+        addToEatList(name, () => navigation.navigate('Index'));
       }}></Button> */}
     </View>
   );
