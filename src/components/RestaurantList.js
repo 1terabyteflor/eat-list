@@ -6,11 +6,11 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import RestaurantDetail from './RestaurantDetail';
+import { useNavigation } from '@react-navigation/native';
 
-const RestaurantList = ({ title, restaurants }) => {
-  const navigation = useNavigation();
+const RestaurantList = ({ restaurants }) => {
+  const navigation = useNavigation(); 
 
   if (!restaurants.length) {
     return null;
@@ -18,10 +18,7 @@ const RestaurantList = ({ title, restaurants }) => {
 
   return (
     <View style={styles.containerStyle}>
-      <Text style={styles.titleStyle}>{title}</Text>
       <FlatList
-        showsHorizontalScrollIndicator={false}
-        horizontal
         data={restaurants}
         keyExtractor={(restaurant) => restaurant.id}
         renderItem={({ item }) => {
@@ -40,13 +37,9 @@ const RestaurantList = ({ title, restaurants }) => {
 export default RestaurantList;
 
 const styles = StyleSheet.create({
-  titleStyle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginLeft: 12,
-    marginBottom: 5,
-  },
   containerStyle: {
     marginBottom: 10,
+    flex: 1, 
+    alignContent: 'center'
   },
 });

@@ -22,7 +22,7 @@ export default () => {
         }
       };
       useEffect(() => {
-        searchRestaurants('restaurange');
+        searchRestaurants('');
       }, []);
 
       return [searchRestaurants, results, errorMessage];

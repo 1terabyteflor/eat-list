@@ -1,27 +1,33 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import Search from '../components/Search';
 import useResults from '../hooks/useResults';
 import RestaurantList from '../components/RestaurantList';
 
 
-const CreateScreen = ({ navigation }) => {
+const CreateScreen = () => {
   const [term, setTerm] = useState('');
   const [searchRestaurants, restaurants, errorMessage] = useResults();
 
   return (
-    <View>
+    <View style={styles.main}>
       <Search term={term} onTermChange={setTerm} onTermSubmit={() => searchRestaurants(term)} />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
-      <Text>We have found {restaurants.length} results</Text>
       <ScrollView>
-        <RestaurantList
+        <RestaurantList 
+          style={styles.main}
           restaurants={restaurants}/>
         </ScrollView>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  main: {
+    flex: 1, 
+    alignContent: 'center',
+    justifyContent: 'space-between',
+  }
+});
 
 export default CreateScreen;

@@ -10,9 +10,10 @@ import { Context } from '../context/EatListContext';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 import mainStyles from '../utils/styles/mainStyles';
+import { useNavigation } from '@react-navigation/native';
 
-
-const IndexScreen = ({ navigation }) => {
+const IndexScreen = () => {
+  const navigation = useNavigation(); 
   const { state, deleteItem, getEatList } = useContext(Context);
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const IndexScreen = ({ navigation }) => {
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                onPress={() => navigation.navigate('Show', { id: item.id })}
+                onPress={() => navigation.navigate('Detail', { id: item.id })}
               >
                 <View style={styles.row}>
                   <Text style={styles.title}>

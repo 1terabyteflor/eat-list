@@ -10,10 +10,5 @@ const mainStyles = StyleSheet.create({
   }
 });
 
-const mainStyleContainerRow = StyleSheet.create({
-  containerStyle: {
-    marginStart: 12
-  }
-});
 
 export default mainStyles;

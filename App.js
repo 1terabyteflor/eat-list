@@ -1,35 +1,42 @@
 import React from 'react';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import IndexScreen from './src/screens/IndexScreen';
-import { Provider } from './src/context/EatListContext';
-import ShowScreen from './src/screens/ShowScreen';
 import CreateScreen from './src/screens/CreateScreen';
-import EditScreen from './src/screens/EditScreen';
 import DetailScreen from './src/screens/DetailScreen';
+import IndexScreen from './src/screens/IndexScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Provider } from './src/context/EatListContext';
 
-const navigator = createStackNavigator(
-  {
-    Index: IndexScreen,
-    Show: ShowScreen,
-    Create: CreateScreen,
-    Edit: EditScreen,
-    Detail: DetailScreen
-  },
-  {
-    initialRouteName: 'Index',
-    defaultNavigationOptions: {
-      title: 'EAT-LIST',
-    },
-  }
-);
+const Stack = createStackNavigator();
 
-const App = createAppContainer(navigator);
-
-export default () => {
+function App() {
   return (
     <Provider>
-      <App />
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{ headerTitleAlign: 'center' }}
+        initialRouteName='Create'>
+        <Stack.Screen
+          name='Index'
+          component={IndexScreen}
+          options={{ title: 'Index' }}/>
+        <Stack.Screen
+          name='Detail'
+          component={DetailScreen}
+          options={{
+            title: 'Detalle',
+          }}
+        />        
+        <Stack.Screen
+            name='Create'
+            component={CreateScreen}
+            options={{
+                title: 'Create',
+            }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
     </Provider>
   );
-};
+}
+
+export default App;

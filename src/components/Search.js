@@ -1,31 +1,13 @@
-import React, {useState} from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from "react";
+import { View, StyleSheet } from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
 import { Feather } from '@expo/vector-icons'
+import { darkGray } from "../utils/colors";
 
-const Search = ({query, onSearchChange, onSearchSubmit  }) => {
-    const [search, setSearch] = useState('');
+const Search = ({term, onTermChange, onTermSubmit  }) => {
+  const searchForRestaurants = () => {};
 
-    const onChangeSearch = value => {
-        setSearch(value);
-      };
-    
-      const handleClearSearch = () => {
-        setSearch('');
-      };
-    
-    // navego a detalle de película 
-    const handleSubmit = () => {
-        if (search) {
-          navigate('SearchResults', {
-            typeRequest: 'search',
-            name: search
-          });
-        }
-      };
-    
-    
-    return (
+  return (
         <View style={styles.container}>
             <View style={styles.containerInput}>
             <View style={styles.inputDirection}>
@@ -35,20 +17,10 @@ const Search = ({query, onSearchChange, onSearchSubmit  }) => {
                 size={25}/>
             <TextInput 
                 placeholder='Buscar'
-                value={search}
-                onChangeText={onChangeSearch}
-                onEndEditing={onSearchSubmit}
+                value={term}
+                onChangeText={onTermChange}
+                onEndEditing={onTermSubmit}
                 style={styles.textInputStyle}/>
-            {search.length > 0 && (
-            <TouchableOpacity onPress={handleClearSearch}>
-              <Feather
-                style={styles.icon}
-                name="x"
-                size={20}
-                color='#000000'
-              />
-            </TouchableOpacity>
-          )}
         </View>
         </View>
         </View>
@@ -67,7 +39,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#FFFFFF',
       borderRadius: 15,
       borderWidth: 1,
-      borderColor: 'gray'
+      borderColor: darkGray
     },
     inputDirection: {
       flex: 1,

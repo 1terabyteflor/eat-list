@@ -27,7 +27,7 @@ const getEatList = dispatch => {
 
 const addToEatList = dispatch => {
   return async (title, callback) => {
-    await jsonServer.post('/eatList', { title, content });
+    await jsonServer.post('/eatList', { title });
 
     if (callback) {
       callback();
