@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import CreateScreen from './src/screens/CreateScreen';
 import DetailScreen from './src/screens/DetailScreen';
 import IndexScreen from './src/screens/IndexScreen';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from './src/context/EatListContext';
 
 const Stack = createStackNavigator();
@@ -25,12 +26,12 @@ function App() {
           options={{
             title: 'Detalle',
           }}
-        />        
+        />
         <Stack.Screen
             name='Create'
             component={CreateScreen}
             options={{
-                title: 'Create',
+              title: 'Create',
             }}
         />
       </Stack.Navigator>

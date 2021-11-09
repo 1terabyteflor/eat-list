@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 import React, { useReducer } from 'react';
 
 export default (reducer, actions, initialState) => {
@@ -7,7 +9,7 @@ export default (reducer, actions, initialState) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const boundActions = {};
-    for (let key in actions) {
+    for (const key in actions) {
       boundActions[key] = actions[key](dispatch);
     }
 

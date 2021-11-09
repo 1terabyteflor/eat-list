@@ -1,28 +1,19 @@
-import React, { useContext } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-
-const RestaurantDetail = ({ restaurant }) => {
-
-    return (
-        <View style={styles.main}>
-        <Image style={styles.imgStyle} source={{ uri: restaurant.image_url }} />
-        <Text style={styles.nameStyle}>{restaurant.name}</Text>
-        <Text style={styles.ratingStyle}>
-        {restaurant.rating} estrellas, {restaurant.review_count} reseñas</Text>
-        </View>
-  );
-};
-
-export default RestaurantDetail;
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+} from 'react-native';
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
     alignContent: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   imgStyle: {
-    /* responsive */
     width: 800,
     alignSelf: 'center',
     height: 200,
@@ -34,12 +25,23 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginStart: 10,
     alignSelf: 'center',
-    color: 'grey'
+    color: 'grey',
   },
   ratingStyle: {
     marginBottom: 10,
     marginStart: 10,
     alignSelf: 'center',
-    color: 'grey'
-  }
+    color: 'grey',
+  },
 });
+
+const RestaurantDetail = ({ restaurant }) => (
+        <View style={styles.main}>
+        <Image style={styles.imgStyle} source={{ uri: restaurant.image_url }} />
+        <Text style={styles.nameStyle}>{restaurant.name}</Text>
+        <Text style={styles.ratingStyle}>
+        {restaurant.rating} estrellas, {restaurant.review_count} reseñas</Text>
+        </View>
+);
+
+export default RestaurantDetail;

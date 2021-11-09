@@ -1,35 +1,70 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, Text, View, FlatList, Image, Button } from 'react-native';
-import yelp from '../api/yelp';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Image,
+  Button,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import {Context} from '../context/EatListContext';
+import yelp from '../api/yelp';
+import { Context } from '../context/EatListContext';
+
+const styles = StyleSheet.create({
+  main: {
+    margin: 10,
+  },
+  imgStyle: {
+    width: 330,
+    height: 200,
+    borderRadius: 5,
+    marginVertical: 10,
+    marginRight: 5,
+  },
+  nameStyle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginRight: 4,
+  },
+  ratingStyle: {
+    fontSize: 18,
+    color: 'grey',
+  },
+  openStyle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'green',
+  },
+  closedStyle: {
+    color: 'red',
+  },
+});
 
 const DetailScreen = ({ route }) => {
   const { id } = route.params;
   const [details, setDetails] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
   const { addToEatList } = useContext(Context);
 
-  //mover a un Hook
   const restaurantDetail = async () => {
     try {
-    const response = await yelp.get(`/${id}`);
-        setDetails(response.data);
+      const response = await yelp.get(`/${id}`);
+      setDetails(response.data);
     } catch (err) {
-        setErrorMessage('Algo salió mal');
+      setErrorMessage('Algo salió mal');
     }
-};
+  };
 
   useEffect(() => {
-      restaurantDetail();
+    restaurantDetail();
   }, []);
-
 
   if (!details) {
     return null;
   }
-  console.log(details);
 
   return (
     <View>
@@ -39,9 +74,7 @@ const DetailScreen = ({ route }) => {
         horizontal
         data={details.photos}
         keyExtractor={(photo) => photo}
-        renderItem={({ item }) => {
-          return <Image style={styles.imgStyle} source={{ uri: item }} />;
-        }}
+        renderItem={({ item }) => <Image style={styles.imgStyle} source={{ uri: item }} />}
       />
       <View style={styles.main}>
         <Text style={styles.nameStyle}>{details.name}</Text>
@@ -61,35 +94,5 @@ const DetailScreen = ({ route }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {
-    margin: 10
-  },
-  imgStyle: {
-    width: 330,
-    height: 200,
-    borderRadius: 5,
-    marginVertical: 10,
-    marginRight: 5
-  },
-  nameStyle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginRight: 4,
-  },
-  ratingStyle: {
-    fontSize: 18,
-    color: 'grey',
-  },
-  openStyle: {
-   fontSize: 18,
-   fontWeight: 'bold',
-   color: 'green',
-  },
-  closedStyle: {
-    color: 'red',
-  },
-});
 
 export default DetailScreen;
